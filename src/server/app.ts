@@ -5,8 +5,8 @@ import Router from '../api/routes'
 
 class App {
   express: Application
-  database = new Database()
-  router = new Router()
+  private database = new Database()
+  private router = new Router()
 
   constructor() {
     this.express = express()

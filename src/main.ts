@@ -8,5 +8,6 @@ const { PORT } = process.env || 5000
 const server = http.createServer(App)
 
 server.listen(PORT)
-server.on('listening', () => console.log(`API has been started on port ${PORT}`))
+server.on('listening', () => 
+  console.log(`API has been started... click => http://localhost:${PORT}/api/check/health`))
 server.on('error', (error: NodeJS.ErrnoException) => console.log(error.message))
