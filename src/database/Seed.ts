@@ -1,6 +1,7 @@
 import fs from 'fs'
 import Database from './Database'
 import IUser from '../commons/interfaces/user'
+import { User } from '../api/modules/users/user.model'
 
 require('dotenv').config()
 
@@ -9,7 +10,6 @@ class Seed extends Database {
 
   constructor() {
     super()
-
     this.connect().then(() => this.initialize())
   }
 
@@ -36,12 +36,12 @@ class Seed extends Database {
     // this.courses = JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf-8'))
     // this.reviews = JSON.parse(fs.readFileSync(`${__dirname}/_data/reviews.json`, 'utf-8'))
     this.users = JSON.parse(fs.readFileSync(`${__dirname}/_data/users.json`, 'utf-8'))
-    console.log(this.users)
   }
 
   private async importData() {
     try {
       // Get App Models
+      await User.create(this.users)
 
       console.log('Data Imported...');
       process.exit();
@@ -53,7 +53,8 @@ class Seed extends Database {
   private async deleteData() {
     try {
       // Get App Models
-
+      await User.deleteMany({})
+     
       console.log('Data Destroyed...');
       process.exit();
     } catch (err) {

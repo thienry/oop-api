@@ -9,4 +9,4 @@ class CheckRouter extends BaseRouter {
   }
 }
 
-export default new CheckRouter().getRouter()
+export default new CheckRouter().router

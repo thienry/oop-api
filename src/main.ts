@@ -5,7 +5,7 @@ require('dotenv').config()
 
 const { PORT } = process.env || 5000
 
-const server = http.createServer(App)
+export const server = http.createServer(App)
 
 server.listen(PORT)
 server.on('listening', () => 

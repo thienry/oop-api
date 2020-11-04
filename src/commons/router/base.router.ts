@@ -1,19 +1,34 @@
-import express from 'express'
-import Async from '../middlewares/async.middlewares'
+import express, { Router } from 'express'
+import { asyncHandler } from '../middlewares/async.middlewares'
 
-export default class BaseRouter {
-  private router: express.Router
+export default abstract class BaseRouter {
   controller: any
+  private _router: Router
 
-  constructor() {
-    this.router = express.Router({ mergeParams: true })
+  public get router(): Router {
+    this.initialize()
+    return this._router
   }
+  
+  constructor() {
+    this._router = express.Router({ mergeParams: true })
+  }
+
+  abstract initialize(): void
 
   get(path: string, fn: Function, ...middlewares: any[]) {
-    this.router.get(path, middlewares, Async(fn.bind(this.controller)))
+    this._router.get(path, middlewares, asyncHandler(fn.bind(this.controller)))
   }
 
-  getRouter() {
-    return this.router
+  post(path: string, fn: Function, ...middlewares: any[]) {
+    this._router.post(path, middlewares, asyncHandler(fn.bind(this.controller)))
+  }
+
+  put(path: string, fn: Function, ...middlewares: any[]) {
+    this._router.put(path, middlewares, asyncHandler(fn.bind(this.controller)))
+  }
+
+  delete(path: string, fn: Function, ...middlewares: any[]) {
+    this._router.delete(path, middlewares, asyncHandler(fn.bind(this.controller)))
   }
 }

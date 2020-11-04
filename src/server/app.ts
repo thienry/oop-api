@@ -12,10 +12,8 @@ class App {
     this.express = express()
 
     this.database.connect()
-      .then(() => {
-        this.middlewares()
-        this.routes()
-      })
+    this.middlewares()
+    this.routes()
   }
 
   private middlewares() {

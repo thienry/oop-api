@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/main.ts",
+  "type": "module",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/main.ts",
     "start": "NODE_ENV=production tsc src/main.ts",
