@@ -14,7 +14,7 @@ export default class Database {
   
       console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
-      console.log(`MongoDB Could not connect: ${error.message}`);
+      throw Error(`MongoDB Could not connect: ${error.message}`);
     }
   }
 }

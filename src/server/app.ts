@@ -1,6 +1,6 @@
 import express, { Application } from 'express'
 
-import Database from '../commons/database/Database'
+import Database from '../database/Database'
 import Router from '../api/routes'
 
 class App {
@@ -10,10 +10,12 @@ class App {
 
   constructor() {
     this.express = express()
-    this.database.connect()
 
-    this.middlewares()
-    this.routes()
+    this.database.connect()
+      .then(() => {
+        this.middlewares()
+        this.routes()
+      })
   }
 
   private middlewares() {
