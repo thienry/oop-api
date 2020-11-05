@@ -11,7 +11,12 @@ class UserController extends HttpController {
       const users = await this.user.find()
       this.sendResponse(res, next, users)
     } catch (error) {
-      this.sendResponse(res, next, {}, { status: 500, message: 'Error on list users' })
+      const errorResponse = { 
+        status: 500, 
+        message: `Error on list users | ${error.message}`
+      }
+
+      this.sendResponse(res, next, {}, errorResponse)
     }
   }
 
@@ -22,7 +27,12 @@ class UserController extends HttpController {
       const user = await this.user.findById(userId) as Document
       this.sendResponse(res, next, user)
     } catch (error) {
-      this.sendResponse(res, next, {}, { status: 500, message: 'Error on read user by id' })
+      const errorResponse = { 
+        status: 500, 
+        message: `Error on read user by id | ${error.message}`
+      }
+
+      this.sendResponse(res, next, {}, errorResponse)
     }
   }
 
@@ -31,7 +41,12 @@ class UserController extends HttpController {
       const newUser = await this.user.create(req.body)
       this.sendResponse(res, next, newUser)  
     } catch (error) {
-      this.sendResponse(res, next, {}, { status: 500, message: 'Error on create user' })
+      const errorResponse = { 
+        status: 500, 
+        message: `Error on create user | ${error.message}`
+      }
+
+      this.sendResponse(res, next, {}, errorResponse)
     }
   }
 
@@ -43,7 +58,12 @@ class UserController extends HttpController {
       const updatedUser = await this.user.findByIdAndUpdate(userId, request, { new: true }) as Document
       this.sendResponse(res, next, updatedUser)
     } catch (error) {
-      this.sendResponse(res, next, {}, { status: 500, message: 'Error on update user' })
+      const errorResponse = { 
+        status: 500, 
+        message: `Error on update user | ${error.message}`
+      }
+
+      this.sendResponse(res, next, {}, errorResponse)
     }
   }
 
@@ -54,7 +74,12 @@ class UserController extends HttpController {
       const isDeleted = await this.user.findByIdAndDelete(userId) as Document
       this.sendResponse(res, next, isDeleted)
     } catch (error) {
-      this.sendResponse(res, next, {}, { status: 500, message: 'Error on delete user' })
+      const errorResponse = { 
+        status: 500, 
+        message: `Error on delete user | ${error.message}`
+      }
+
+      this.sendResponse(res, next, {}, errorResponse)
     }
   }
 }

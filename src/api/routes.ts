@@ -3,7 +3,7 @@ import path from 'path'
 import { Application } from 'express'
 
 export default class Router {
-  initialize(app: Application) {
+  initialize(app: Application): void {
     const isDirectory = (source: string) => fs.lstatSync(source).isDirectory()
     
     const getDirectories = (source: string) => 

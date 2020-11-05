@@ -3,13 +3,12 @@ import Database from './Database'
 import IUser from '../commons/interfaces/user'
 import { User } from '../api/modules/users/user.model'
 
-require('dotenv').config()
-
 class Seed extends Database {
   private users!: IUser[]
 
   constructor() {
     super()
+    this.dotenv.config()
     this.connect().then(() => this.initialize())
   }
 

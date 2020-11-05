@@ -1,4 +1,4 @@
 export default interface IParams {
-  status: number,
+  status: number
   message: string
 }
